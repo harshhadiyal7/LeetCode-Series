@@ -25,4 +25,26 @@ Constraints:
 
 -231 <= x <= 231 - 1
 '''
-
+class Solution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        # 1. Edge Cases:
+        # Negative numbers are not palindromes (e.g., -121 reads 121-).
+        # Numbers ending in 0 (other than 0 itself) cannot be palindromes (e.g., 10 reads 01).
+        if x < 0 or (x > 0 and x % 10 == 0):
+            return False
+        
+        # 2. Reversing the number mathematically
+        reversed_num = 0
+        temp = x
+        
+        while temp > 0:
+            digit = temp % 10
+            reversed_num = reversed_num * 10 + digit
+            temp //= 10  # Integer division to remove the last digit
+            
+        # 3. Check if the reversed number equals the original
+        return x == reversed_num
